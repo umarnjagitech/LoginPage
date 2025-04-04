@@ -1,5 +1,6 @@
 package com.example.loginpage.ui.login
 
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -29,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.focusModifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -54,6 +56,8 @@ fun LoginScreen() {
     val (checked, onCheckedChanged) = rememberSaveable {
         mutableStateOf(false)
     }
+
+    val context = LocalContext.current
 
 
     Column (
@@ -126,7 +130,22 @@ fun LoginScreen() {
             Text("Login")
         }
         AlternativeLoginOptions(
-            onIconClick = {},
+            onIconClick = {index ->
+                when(index){
+                    0 -> {
+                        Toast.makeText(context, "Instagram Login Click", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                    1 -> {
+                        Toast.makeText(context, "GitHub Login Click", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                    2 -> {
+                        Toast.makeText(context, "Google Login Click", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+            },
             onSignUpClick = {},
             modifier = Modifier
                 .fillMaxSize()
