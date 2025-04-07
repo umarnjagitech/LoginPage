@@ -60,6 +60,9 @@ fun LoginScreen(
         mutableStateOf(false)
     }
 
+    val isFieldsNotEmpty = userName.isNotEmpty()
+            && password.isNotEmpty()
+
     val context = LocalContext.current
 
 
@@ -128,7 +131,8 @@ fun LoginScreen(
         )
         Button(
             onClick = onLoginClick,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            enabled = isFieldsNotEmpty
         ) {
             Text("Login")
         }
