@@ -46,7 +46,10 @@ val itemSpacing = 8.dp
 
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    onLoginClick:() -> Unit,
+    onSignUpClick:() -> Unit,
+) {
     val (userName, setUsername) = rememberSaveable {
         mutableStateOf("")
     }
@@ -124,7 +127,7 @@ fun LoginScreen() {
                 .height(itemSpacing)
         )
         Button(
-            onClick = {},
+            onClick = onLoginClick,
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Login")
@@ -146,7 +149,7 @@ fun LoginScreen() {
                     }
                 }
             },
-            onSignUpClick = {},
+            onSignUpClick = onSignUpClick,
             modifier = Modifier
                 .fillMaxSize()
                 .wrapContentSize(align = Alignment.BottomCenter)
@@ -162,7 +165,7 @@ fun LoginScreen() {
 @Composable
 fun PreviewLoginScreen() {
     LoginPageTheme {
-        LoginScreen()
+        LoginScreen({}, {})
     }
 }
 

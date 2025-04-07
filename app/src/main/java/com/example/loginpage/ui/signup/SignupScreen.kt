@@ -40,7 +40,12 @@ import com.example.loginpage.ui.login.itemSpacing
 import com.example.loginpage.ui.theme.LoginPageTheme
 
 @Composable
-fun SignUpScreen(modifier: Modifier = Modifier) {
+fun SignUpScreen(
+    onLoginClick:() -> Unit,
+    onSignUpClick:() -> Unit,
+    onPolicyClick:() -> Unit,
+    onPrivacyClick:() -> Unit,
+) {
     val (firstName, setFirstname) = rememberSaveable {
         mutableStateOf("")
     }
@@ -170,10 +175,12 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
                         privacyText -> {
                             Toast.makeText(context, "Privacy Text Clicked", Toast.LENGTH_SHORT)
                                 .show()
+                            onPrivacyClick()
                         }
                         policyText -> {
                             Toast.makeText(context, "Policy Text Clicked", Toast.LENGTH_SHORT)
                                 .show()
+                            onPolicyClick()
                         }
 
                     }
@@ -187,10 +194,10 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
                 .height(defaultPadding + 8.dp)
         )
         Button(
-            onClick = {},
+            onClick = onSignUpClick,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Signup")
+            Text("Sign Up")
         }
         Spacer(
             modifier = Modifier
@@ -213,6 +220,7 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
             signInAnnotation.getStringAnnotations(offset, offset).forEach{
                 if (it.tag == signInTxt){
                     Toast.makeText(context, "Sign In Clicked", Toast.LENGTH_SHORT).show()
+                    onLoginClick()
                 }
             }
         }
@@ -227,6 +235,8 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
 @Composable
 fun PreviewSignupScreen() {
     LoginPageTheme {
-        SignUpScreen()
+        SignUpScreen(
+            {}, {}, {}, {}
+        )
     }
 }
