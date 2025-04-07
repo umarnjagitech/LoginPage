@@ -13,8 +13,10 @@ import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -27,6 +29,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.loginpage.ui.components.HeaderText
 import com.example.loginpage.ui.components.LoginTextField
 import com.example.loginpage.ui.login.LoginScreen
@@ -78,7 +81,7 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
         )
         Spacer(
             modifier = Modifier
-                .height(itemSpacing)
+                .height(defaultPadding)
         )
         LoginTextField(
             value = lastName,
@@ -90,7 +93,7 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
         )
         Spacer(
             modifier = Modifier
-                .height(itemSpacing)
+                .height(defaultPadding)
         )
         LoginTextField(
             value = email,
@@ -102,7 +105,7 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
         )
         Spacer(
             modifier = Modifier
-                .height(itemSpacing)
+                .height(defaultPadding)
         )
         LoginTextField(
             value = password,
@@ -116,7 +119,7 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
         )
         Spacer(
             modifier = Modifier
-                .height(itemSpacing)
+                .height(defaultPadding)
         )
         LoginTextField(
             value = confirmPassword,
@@ -130,7 +133,7 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
         )
         Spacer(
             modifier = Modifier
-                .height(itemSpacing)
+                .height(defaultPadding)
         )
         Row(
             horizontalArrangement = Arrangement.Center,
@@ -175,6 +178,40 @@ fun SignUpScreen(modifier: Modifier = Modifier) {
 
             }
 
+        }
+        Spacer(
+            modifier = Modifier
+                .height(defaultPadding + 8.dp)
+        )
+        Button(
+            onClick = {},
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Signup")
+        }
+        Spacer(
+            modifier = Modifier
+                .height(defaultPadding)
+        )
+        val signInTxt = "Sign In"
+        val signInAnnotation = buildAnnotatedString {
+            withStyle(SpanStyle(color = MaterialTheme.colorScheme.onBackground)){
+                append("Already have an account?")
+            }
+            append("  ")
+            withStyle(SpanStyle(color = MaterialTheme.colorScheme.primary)){
+                pushStringAnnotation(signInTxt, signInTxt)
+                append(signInTxt)
+            }
+            append("  ")
+
+        }
+        ClickableText(signInAnnotation, ) {offset->
+            signInAnnotation.getStringAnnotations(offset, offset).forEach{
+                if (it.tag == signInTxt){
+                    Toast.makeText(context, "Sign In Clicked", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
